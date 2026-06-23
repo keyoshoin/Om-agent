@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OM-Agent</title>
+    <!-- Element Plus CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- 防止 Vue 挂载前 FOUC -->
+    <style>
+        #app[v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- API Key 认证弹窗 -->
+        <el-dialog v-model="showAuthDialog" title="🔐 API 认证" width="450px"
+            :close-on-click-modal="false" :close-on-press-escape="false"
+            :show-close="false">
+            <p style="margin-bottom:12px;color:#606266">
+                请输入 API Key 以访问 OM-Agent 服务。
+            </p>
+            <el-input v-model="apiKeyInput" type="password" show-password
+                placeholder="输入 X-API-Key" @keyup.enter="saveApiKey" />
+            <template #footer>
+                <el-button type="primary" @click="saveApiKey" :disabled="!apiKeyInput.trim()">
+                    确认
+                </el-button>
+            </template>
+        </el-dialog>
+
+        <el-container style="height:100vh">
+            <!-- 左侧导航栏 -->
+            <el-aside width="200px" :class="['app-sidebar', { collapsed: sidebarCollapsed }]">
+                <div class="sidebar-header">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="#409eff"/>
+                            <path d="M16 6L8 12v4l8-4V6z" fill="#fff" opacity="0.9"/>
+                            <path d="M16 6l8 6v4l-8-4V6z" fill="#fff" opacity="0.7"/>
+                            <path d="M8 16l8 4 8-4v8l-8 4-8-4v-8z" fill="#fff" opacity="0.85"/>
+                            <circle cx="16" cy="18" r="3" fill="#409eff"/>
+                        </svg>
+                    </div>
+                    <div class="brand">
+                        <h2>OM-Agent</h2>
+                        <span class="version">v0.3</span>
+                    </div>
+                </div>
+                <el-menu
+                    :default-active="activeTab"
+                    @select="handleTabSelect"
+                    background-color="transparent"
+                    text-color="#bfcbd9"
+                    active-text-color="#409eff"
+                    :collapse="sidebarCollapsed"
+                >
+                    <el-menu-item index="devices">
+                        <span class="menu-icon">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="1" y="2" width="18" height="12" rx="2"/>
+                                <path d="M6 18h8M10 14v4"/>
+                            </svg>
+                        </span>
+                        <span class="menu-text">设备管理</span>
+                    </el-menu-item>
+                    <el-menu-item index="execute">
+                        <span class="menu-icon">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="4,2 17,10 4,18"/>
+                            </svg>
+                        </span>
+                        <span class="menu-text">执行任务</span>
+                    </el-menu-item>
+                    <el-menu-item index="history">
+                        <span class="menu-icon">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="10" cy="10" r="8"/>
+                                <polyline points="10,5 10,10 14,12"/>
+                            </svg>
+                        </span>
+                        <span class="menu-text">历史记录</span>
+                    </el-menu-item>
+                    <el-menu-item index="report">
+                        <span class="menu-icon">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5 2h7l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+                                <polyline points="12,2 12,7 17,7"/>
+                                <line x1="7" y1="11" x2="13" y2="11"/>
+                                <line x1="7" y1="14" x2="13" y2="14"/>
+                            </svg>
+                        </span>
+                        <span class="menu-text">报告详情</span>
+                    </el-menu-item>
+                </el-menu>
+                <div class="sidebar-toggle" @click="toggleSidebar" :title="sidebarCollapsed ? '展开' : '收起'">
+                    {{ sidebarCollapsed ? '▶' : '◀' }}
+                </div>
+            </el-aside>
+
+            <el-container>
+                <el-main>
+                    <!-- 设备管理页 -->
+                    <div v-show="activeTab === 'devices'">
+                        <devices-page @select-device="onSelectDevice"></devices-page>
+                    </div>
+
+                    <!-- 执行任务页 -->
+                    <div v-show="activeTab === 'execute'">
+                        <execute-page
+                            :preselected-device="selectedDevice"
+                        ></execute-page>
+                    </div>
+
+                    <!-- 历史记录页 -->
+                    <div v-show="activeTab === 'history'">
+                        <history-page @view-report="onViewReport"></history-page>
+                    </div>
+
+                    <!-- 报告详情页 -->
+                    <div v-show="activeTab === 'report'">
+                        <report-page :record-id="viewingRecordId"></report-page>
+                    </div>
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <!-- Element Plus -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/element-plus/dist/locale/zh-cn.min.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- marked (Markdown) — 指定版本避免 API 不兼容 -->
+    <script src="https://unpkg.com/marked@12.0.0/marked.min.js"></script>
+    <!-- App -->
+    <script src="/static/app.js"></script>
+</body>
+</html>

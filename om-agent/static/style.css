@@ -1,0 +1,503 @@
+/* ─── 全局 ─────────────────────────────────────────────────────────────────── */
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+}
+
+/* Vue 挂载后自动移除 v-cloak，显示页面 */
+[v-cloak] { display: none !important; }
+
+/* ─── 左侧导航栏 ───────────────────────────────────────────────────────────── */
+
+.app-sidebar {
+    background: linear-gradient(180deg, #1a2332 0%, #263445 100%) !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.12);
+    position: relative;
+}
+
+.app-sidebar.collapsed {
+    width: 64px !important;
+}
+
+.app-sidebar .el-menu {
+    border-right: none;
+}
+
+/* ─── 侧边栏头部 ─────────────────────────────────────────────────────────────── */
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 16px;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 8px;
+    min-height: 56px;
+    box-sizing: border-box;
+}
+
+.sidebar-header .logo-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.sidebar-header .logo-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.sidebar-header .brand {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.app-sidebar.collapsed .sidebar-header .brand {
+    opacity: 0;
+    width: 0;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.sidebar-header .version {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    display: block;
+    margin-top: 2px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* ─── 折叠弹窗 (el-popper) ───────────────────────────────────────────────────── */
+
+.el-menu--collapse .el-menu-item .el-tooltip__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Element Plus popover 暗色主题 */
+.el-popper.is-dark {
+    background: #263445 !important;
+    color: #bfcbd9 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ─── 折叠按钮 ───────────────────────────────────────────────────────────────── */
+
+.sidebar-toggle {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── 菜单项 ─────────────────────────────────────────────────────────────────── */
+
+.app-sidebar .el-menu-item {
+    font-size: 14px;
+    height: 48px;
+    line-height: 48px;
+    margin: 2px 8px;
+    border-radius: 8px;
+    padding-left: 16px !important;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* el-menu collapse 状态下的菜单项 */
+.app-sidebar .el-menu--collapse .el-menu-item {
+    padding-left: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 6px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.app-sidebar .el-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.app-sidebar .el-menu-item.is-active {
+    background: rgba(64, 158, 255, 0.15) !important;
+    color: #409eff !important;
+    font-weight: 600;
+}
+
+.app-sidebar .el-menu-item.is-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 20px;
+    border-radius: 0 3px 3px 0;
+    background: #409eff;
+}
+
+/* 折叠时隐藏 active 指示条 */
+.app-sidebar .el-menu--collapse .el-menu-item.is-active::before {
+    display: none;
+}
+
+/* 折叠时的 hover popover 背景 */
+.app-sidebar .el-menu--collapse .el-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ─── 菜单项图标 ─────────────────────────────────────────────────────────────── */
+
+.menu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.menu-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.app-sidebar.collapsed .menu-icon {
+    margin-right: 0;
+}
+
+.app-sidebar.collapsed .menu-text {
+    display: none;
+}
+
+/* ─── 页面标题 ─────────────────────────────────────────────────────────────── */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.page-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #303133;
+}
+
+/* ─── 实时监控日志 ─────────────────────────────────────────────────────────── */
+
+.monitor-log {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+    font-size: 13px;
+    padding: 16px;
+    border-radius: 6px;
+    max-height: 500px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.log-entry {
+    padding: 2px 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.log-time {
+    color: #6a9955;
+    margin-right: 12px;
+}
+
+.log-info .log-msg { color: #d4d4d4; }
+.log-success .log-msg { color: #4ec9b0; }
+.log-error .log-msg { color: #f44747; }
+.log-warning .log-msg { color: #ce9178; }
+
+/* ─── Markdown 报告 ────────────────────────────────────────────────────────── */
+
+.markdown-body {
+    padding: 16px 0;
+    color: #303133;
+    line-height: 1.7;
+    white-space: pre-line;  /* 保留换行，marked 失败时也能正常显示 */
+}
+
+.markdown-body h1 { font-size: 24px; border-bottom: 2px solid #e4e7ed; padding-bottom: 8px; margin: 16px 0; }
+.markdown-body h2 { font-size: 20px; border-bottom: 1px solid #e4e7ed; padding-bottom: 6px; margin: 16px 0 8px; }
+.markdown-body h3 { font-size: 16px; margin: 12px 0 6px; }
+.markdown-body h4 { font-size: 14px; margin: 10px 0 4px; }
+
+.markdown-body code {
+    background: #f0f2f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "Cascadia Code", "Consolas", monospace;
+    font-size: 13px;
+    color: #e64256;
+}
+
+.markdown-body pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.markdown-body pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+}
+
+.markdown-body th, .markdown-body td {
+    border: 1px solid #e4e7ed;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.markdown-body th {
+    background: #f5f7fa;
+    font-weight: 600;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid #409eff;
+    padding: 8px 16px;
+    margin: 12px 0;
+    background: #ecf5ff;
+    color: #606266;
+}
+
+.markdown-body ul, .markdown-body ol {
+    padding-left: 24px;
+}
+
+.markdown-body details {
+    margin: 8px 0 12px;
+    border: 1px solid #e4e7ed;
+    border-radius: 6px;
+    padding: 10px 14px;
+    background: #fafafa;
+}
+
+.markdown-body summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #409eff;
+    font-size: 13px;
+    user-select: none;
+}
+
+.markdown-body summary:hover {
+    color: #337ecc;
+}
+
+.markdown-body details pre {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+/* ─── Element Plus 微调 ────────────────────────────────────────────────────── */
+
+.el-main {
+    padding: 24px !important;
+}
+
+/* ─── 文件上传 ─────────────────────────────────────────────────────────────── */
+
+.upload-zone {
+    border: 2px dashed #dcdfe6;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #fafafa;
+    width: 100%;
+}
+
+.upload-zone:hover {
+    border-color: #409eff;
+    background: #ecf5ff;
+}
+
+.upload-zone.drag-over {
+    border-color: #409eff;
+    background: #d9ecff;
+    box-shadow: 0 0 8px rgba(64, 158, 255, 0.3);
+}
+
+.upload-zone-sm {
+    padding: 12px 20px;
+    margin-top: 8px;
+}
+
+.upload-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.upload-placeholder {
+    color: #606266;
+}
+
+/* ─── 文件列表 ─────────────────────────────────────────────────────────────── */
+
+.file-list {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f5f7fa;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.file-icon {
+    font-size: 20px;
+}
+
+.file-name {
+    flex: 1;
+    font-size: 13px;
+    color: #303133;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-size {
+    font-size: 12px;
+    color: #909399;
+    white-space: nowrap;
+}
+
+/* ─── 图片预览 ─────────────────────────────────────────────────────────────── */
+
+.image-previews {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.image-preview-item {
+    width: 120px;
+    text-align: center;
+}
+
+.image-preview-item img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e4e7ed;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.image-preview-item img:hover {
+    transform: scale(1.05);
+    border-color: #409eff;
+}
+
+.image-preview-name {
+    font-size: 11px;
+    color: #909399;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ─── 层状态卡片 ───────────────────────────────────────────────────────────── */
+
+.layer-status-card {
+    border-left: 3px solid #dcdfe6;
+    transition: border-color 0.3s;
+}
+
+.layer-status-card.layer-running {
+    border-left-color: #409eff;
+    background: #ecf5ff;
+}
+
+.layer-status-card.layer-ok {
+    border-left-color: #67c23a;
+}
+
+.layer-status-card.layer-warning {
+    border-left-color: #e6a23c;
+}
+
+.layer-status-card.layer-error {
+    border-left-color: #f56c6c;
+    background: #fef0f0;
+}
+
+/* ─── 日志图标 ─────────────────────────────────────────────────────────────── */
+
+.log-icon {
+    margin-right: 8px;
+    font-size: 12px;
+    width: 16px;
+    display: inline-block;
+    text-align: center;
+}
