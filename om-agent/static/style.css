@@ -75,14 +75,7 @@ body {
     line-height: 1.2;
 }
 
-.sidebar-header .version {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.35);
-    display: block;
-    margin-top: 2px;
-    font-weight: 400;
-    text-transform: uppercase;
-}
+
 
 /* ─── 折叠弹窗 (el-popper) ───────────────────────────────────────────────────── */
 

@@ -10,8 +10,18 @@ from __future__ import annotations
 
 import logging
 import os
+from pathlib import Path
 
 from fastapi import Header, HTTPException, status
+
+# 确保 .env 已加载 (模块级变量在 import 时求值，早于 config/settings.py 的 load_dotenv)
+try:
+    from dotenv import load_dotenv
+    _env_path = Path(__file__).resolve().parent.parent.parent / ".env"
+    if _env_path.exists():
+        load_dotenv(_env_path)
+except ImportError:
+    pass
 
 logger = logging.getLogger(__name__)
 

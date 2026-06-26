@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="flow_b_inspection" name="流程图B：全链路巡检">
+    <mxGraphModel dx="1591" dy="1068" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1400" pageHeight="1400" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="b_start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontSize=11;fontStyle=1;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;🚀 开始&lt;/span&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;用户发起全链路巡检&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="48" width="220" x="390" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="b_connect" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;🔌 Connect · 建立SSH连接&lt;/font&gt;" vertex="1">
+          <mxGeometry height="45" width="220" x="390" y="107" as="geometry" />
+        </mxCell>
+        <mxCell id="b_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;❌ 报错退出&lt;/font&gt;" vertex="1">
+          <mxGeometry height="38" width="130" x="680" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b_web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;🌐 Web层 (20技能)&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&amp;nbsp;Nginx · PHP-FPM · PG · Redis · SSL · 端口 · 磁盘 · ZMQ&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="500" x="250" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="b_web_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;异常?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="140" x="430" y="277" as="geometry" />
+        </mxCell>
+        <mxCell id="b_web_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=10;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;🔬 LLM深度排查&lt;br&gt;&lt;font style=&quot;&quot;&gt;最多3轮&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="170" x="610" y="284.5" as="geometry" />
+        </mxCell>
+        <mxCell id="b_py" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;🐍 Python层 (18技能)&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&amp;nbsp;守护进程 · Guard · 共享内存 · ZMQ · webtoid · service.json&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="500" x="250" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="b_py_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;异常?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="140" x="430" y="442" as="geometry" />
+        </mxCell>
+        <mxCell id="b_py_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=10;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;🔬 LLM深度排查&lt;br&gt;&lt;font style=&quot;&quot;&gt;最多3轮&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="170" x="610" y="449.5" as="geometry" />
+        </mxCell>
+        <mxCell id="b_eng" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;⚙️ Engine层 (40技能)&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&amp;nbsp;Server(进程/Bypass/DPDK/OOM/XML) + Class(规则/文件锁/僵死/hyperscan)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="500" x="250" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="b_eng_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;异常?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="140" x="430" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="b_eng_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=10;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;🔬 LLM深度排查&lt;br&gt;&lt;font style=&quot;&quot;&gt;最多3轮&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="170" x="610" y="627.5" as="geometry" />
+        </mxCell>
+        <mxCell id="b_sys" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;🖥️ 系统资源层 (15技能)&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&amp;nbsp;CPU · 内存 · 磁盘IO · 进程 · 网络 · dmesg · OOM · 温度 · DNS&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="500" x="250" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="b_sys_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;异常?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="140" x="430" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="b_sys_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=10;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;🔬 LLM深度排查&lt;br&gt;&lt;font style=&quot;&quot;&gt;最多3轮&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="170" x="610" y="807.5" as="geometry" />
+        </mxCell>
+        <mxCell id="b_report" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;📝 full_link_report&lt;br&gt;&lt;font style=&quot;&quot;&gt;🏅 系统健康评级(A~F) · 各层扫描汇总表 · 异常详细分析&lt;br&gt;深度下钻结论(LLM多轮) · 修复优先级 · 完整原始数据&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="440" x="280" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="b_save" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;💾 存入数据库 (RunRecord)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="45" width="300" x="807" y="932.5" as="geometry" />
+        </mxCell>
+        <mxCell id="b_push" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontSize=11;fontStyle=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;✅ 推送报告 · 巡检完成&lt;/font&gt;" vertex="1">
+          <mxGeometry height="45" width="300" x="807" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="be1" edge="1" parent="1" source="b_start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="b_connect">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be2" edge="1" parent="1" source="b_connect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;fontSize=9;fontColor=#b85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="b_error" value="✗ 失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be3" edge="1" parent="1" source="b_connect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;fontSize=9;fontColor=#82b366;" target="b_web" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;✓ 成功&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_wc" edge="1" parent="1" source="b_web" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_web_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_wcl" edge="1" parent="1" source="b_web_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;fontSize=9;fontColor=#d6b656;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="b_web_llm" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be4" edge="1" parent="1" source="b_web_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;fontSize=9;fontColor=#999;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_py" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;否/完成&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.0476" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="be_pc" edge="1" parent="1" source="b_py" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_py_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_pcl" edge="1" parent="1" source="b_py_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;fontSize=9;fontColor=#d6b656;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="b_py_llm" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be5" edge="1" parent="1" source="b_py_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;fontSize=9;fontColor=#999;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_eng" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;否/完成&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_ec" edge="1" parent="1" source="b_eng" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_eng_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_ecl" edge="1" parent="1" source="b_eng_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;fontSize=9;fontColor=#d6b656;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="b_eng_llm" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be6" edge="1" parent="1" source="b_eng_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;fontSize=9;fontColor=#999;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_sys" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;否/完成&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_sc" edge="1" parent="1" source="b_sys" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_sys_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be_scl" edge="1" parent="1" source="b_sys_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;strokeColor=#d6b656;fontSize=9;fontColor=#d6b656;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="b_sys_llm" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be7" edge="1" parent="1" source="b_sys_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;fontSize=9;fontColor=#999;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="b_report" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;否/完成&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be8" edge="1" parent="1" source="b_report" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="b_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be9" edge="1" parent="1" source="b_save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="b_push">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

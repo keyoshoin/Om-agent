@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="flow_a_troubleshoot" name="流程图A：针对性故障排查">
+    <mxGraphModel dx="1835" dy="1232" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1400" pageHeight="1400" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a_start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontSize=11;fontStyle=1;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;🚀 开始&lt;/span&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;用户提交故障描述+截图&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="48" width="200" x="380" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="a_connect" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;🔌 Connect&lt;/span&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;建立 SSH 连接&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="48" width="200" x="380" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="a_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;❌ 连接失败&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;报错退出&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="160" x="720" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="a_plan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;🧠 Plan (LLM)&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot; color=&quot;#666&quot;&gt;分析错误描述 + 上传文件内容&lt;br&gt;从 技能中精选 4-6 个&lt;br&gt;保证跨 Web/Python/Engine/系统覆盖&lt;/font&gt;" vertex="1">
+          <mxGeometry height="82" width="500" x="230" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="a_execute" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;⚡ Execute Skill (循环)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size: 14px;&quot; color=&quot;#666&quot;&gt;从技能队列取出一个 → SSH 执行诊断命令&lt;br&gt;收集 stdout / stderr / exit_code&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="500" x="230" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="a_queue" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;队列&lt;br&gt;有剩余?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="140" x="840" y="323" as="geometry" />
+        </mxCell>
+        <mxCell id="a_evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;📊 Evidence (P0-1, LLM)&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot; color=&quot;#666&quot;&gt;评估本轮所有结果:&lt;br&gt;哪些假设被支持/否定? 还有哪些关键未知?&lt;br&gt;根因是否可以确定?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="82" width="500" x="230" y="444" as="geometry" />
+        </mxCell>
+        <mxCell id="a_rootcause" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;根因&lt;br&gt;确定?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="170" x="395" y="561" as="geometry" />
+        </mxCell>
+        <mxCell id="a_deepplan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;🧠 Deep Plan (P0-2, LLM)&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#666&quot; style=&quot;font-size: 14px;&quot;&gt;从【未执行技能列表】中选择&lt;br&gt;25关键词→技能映射 · PHP路径自动注入&lt;br&gt;技能质量分级 · 枯竭检测&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="82" width="500" x="660" y="559" as="geometry" />
+        </mxCell>
+        <mxCell id="a_validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;🔍 Validate (P0-3, 纯程序化)&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#666&quot; style=&quot;font-size: 14px;&quot;&gt;无需 LLM · bypass 文件检测 · coredump glob&lt;br&gt;OOM 关键字扫描 · GG 共享内存标记检查&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="500" x="660" y="677" as="geometry" />
+        </mxCell>
+        <mxCell id="a_decision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#e65100;strokeWidth=2;fontSize=10;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;决策&lt;br&gt;路由&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="170" x="395" y="795" as="geometry" />
+        </mxCell>
+        <mxCell id="a_replan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;🔄 Replan (LLM)&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot; color=&quot;#666&quot;&gt;全局重新评估&lt;br&gt;最多触发 2 次 · 每2轮replan&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="230" x="90" y="923" as="geometry" />
+        </mxCell>
+        <mxCell id="a_report" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;📝 Report (LLM)&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot; color=&quot;#666&quot;&gt;生成结构化 Markdown 报告: 诊断链路表 · 发现汇总&lt;br&gt;根因分析 · 修复建议 · 附录: 各层诊断结果&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="82" width="510" x="425" y="916" as="geometry" />
+        </mxCell>
+        <mxCell id="a_save" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;💾 存入数据库&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;RunRecord · status=completed&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="48" width="400" x="480" y="1042" as="geometry" />
+        </mxCell>
+        <mxCell id="a_push" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontSize=11;fontStyle=1;" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;✅ 推送报告&lt;br&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;WebSocket 或 stdout&lt;/font&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="48" width="400" x="480" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="ae1" edge="1" parent="1" source="a_start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="a_connect">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae2" edge="1" parent="1" source="a_connect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;fontSize=9;fontColor=#82b366;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="a_plan" value="✓ 成功">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae3" edge="1" parent="1" source="a_connect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;fontSize=9;fontColor=#b85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="a_error" value="✗ 失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae4" edge="1" parent="1" source="a_plan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="a_execute">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae5" edge="1" parent="1" source="a_execute" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;fontSize=9;fontColor=#999;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="a_queue" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;执行完毕&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae6" edge="1" parent="1" source="a_queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#d6b656;dashed=1;fontSize=9;fontColor=#d6b656;exitX=0.5;exitY=0;entryX=1;entryY=0.3;" target="a_execute" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;是&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="878" y="295" />
+              <mxPoint x="748" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae7" edge="1" parent="1" source="a_queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;fontSize=9;fontColor=#999;exitX=0;exitY=1;entryX=1;entryY=0.5;" target="a_evidence" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;否 (本轮完毕)&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="808" y="420" />
+              <mxPoint x="748" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae8" edge="1" parent="1" source="a_evidence" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="a_rootcause">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae9" edge="1" parent="1" source="a_rootcause" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;fontSize=9;fontColor=#b85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="a_deepplan" value="✗ 否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae10" edge="1" parent="1" source="a_rootcause" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;fontSize=9;fontColor=#82b366;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" target="a_report" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;✓ 是&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="594" />
+              <mxPoint x="200" y="961" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae11" edge="1" parent="1" source="a_deepplan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="a_validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae12" edge="1" parent="1" source="a_validate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;exitX=0.5;exitY=1;entryX=1;entryY=0.5;" target="a_decision">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="910" y="770" />
+              <mxPoint x="583" y="770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae13" edge="1" parent="1" source="a_decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#9673a6;dashed=1;fontSize=9;fontColor=#9673a6;exitX=0;exitY=0.5;entryX=0;entryY=0.7;" target="a_execute" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;继续执行&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="834" />
+              <mxPoint x="155" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae14" edge="1" parent="1" source="a_decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#9673a6;dashed=1;fontSize=9;fontColor=#9673a6;exitX=0;exitY=0.8;entryX=0.5;entryY=0;" target="a_replan" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;每 2 轮 replan&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="205" y="857" />
+              <mxPoint x="205" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae15" edge="1" parent="1" source="a_decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;fontSize=9;fontColor=#999;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="a_report" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;耗尽 / 达上限&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae16" edge="1" parent="1" source="a_replan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#9673a6;dashed=1;fontSize=9;fontColor=#9673a6;exitX=0;exitY=0.3;entryX=0;entryY=0.5;" target="a_plan" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;重新规划&lt;/font&gt;">
+          <mxGeometry relative="1" x="-0.0011" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="70" y="940" />
+              <mxPoint x="70" y="236" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ae17" edge="1" parent="1" source="a_report" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="a_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae18" edge="1" parent="1" source="a_save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#666666;" target="a_push">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
